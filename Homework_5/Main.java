@@ -1,29 +1,47 @@
 package Homework_5;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        String str = "pylyp";
+        Scanner input = new Scanner(System.in);
 
-        if (isPalindrome(str)) {
-            System.out.println(str + " is a palindrome.");
-        } else {
-            System.out.println(str + " is not a palindrome.");
+        System.out.print("Enter the array size: ");
+        int n = input.nextInt();
+
+        int[] arr = new int[n];
+
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = input.nextInt();
         }
+
+        int min = findMin(arr);
+        int max = findMax(arr);
+
+        System.out.println("Minimum numeric " + min);
+        System.out.println("Maximum numeric: " + max);
+
+        input.close();
     }
 
-    public static boolean isPalindrome(String str) {
-        // We convert the string into an array of characters
-        char[] charArray = str.toCharArray();
-        int length = charArray.length;
-
-        // We check whether the string is a palindrome
-        for (int i = 0; i < length / 2; i++) {
-            if (charArray[i] != charArray[length - 1 - i]) {
-                return false; // If the characters do not match, then the string is not a palindrome
+    public static int findMin(int[] arr) {
+        int min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
             }
         }
+        return min;
+    }
 
-        return true; // If all characters match, then the string is a palindrome
+    public static int findMax(int[] arr) {
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        return max;
     }
 }
-
