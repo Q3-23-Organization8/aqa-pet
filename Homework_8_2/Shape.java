@@ -4,15 +4,12 @@ import java.util.Objects;
 public abstract class Shape {
     protected String color;
 
-    public double calculateArea() {
-        // Default area calculation
-        return 0.0;
+    public Shape() {
     }
 
-    public double calculatePerimeter() {
-        // Default perimeter calculation
-        return 0.0;
-    }
+    public abstract double calculateArea();
+
+    public abstract double calculatePerimeter();
 
     public void paint() {
         System.out.println("Painting a " + color + " shape.");
