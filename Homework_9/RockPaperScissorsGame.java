@@ -2,28 +2,35 @@ package Homework_9;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RockPaperScissorsGame {
+    private static final Logger LOGGER = Logger.getLogger(RockPaperScissorsGame.class.getName());
+
     public static void main(String[] args) {
+        // Set the logging level (you can adjust as needed)
+        LOGGER.setLevel(Level.INFO);
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Rock-Paper-Scissors Game");
-        System.out.println("Choose an option: ROCK, SCISSORS or PAPER");
+        LOGGER.info("Rock-Paper-Scissors Game");
+        LOGGER.info("Choose an option: ROCK, SCISSORS, or PAPER");
 
         String playerChoiceStr = scanner.nextLine().toUpperCase();
         try {
             Choice playerChoice = Choice.valueOf(playerChoiceStr);
             Choice computerChoice = getRandomChoice();
-            System.out.println("The computer chose: " + computerChoice);
+            LOGGER.info("The computer chose: " + computerChoice);
 
             if (playerChoice == computerChoice) {
-                System.out.println("A draw!");
+                LOGGER.info("A draw!");
             } else if (playerChoice.getGameItem().beats(computerChoice.getGameItem())) {
-                System.out.println("You won!");
+                LOGGER.info("You won!");
             } else {
-                System.out.println("The computer won!");
+                LOGGER.info("The computer won!");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Sorry, wrong choice. Choose ROCK, SCISSORS or PAPER.");
+            LOGGER.log(Level.WARNING, "Invalid choice entered. Choose ROCK, SCISSORS, or PAPER.", e);
         }
     }
 
