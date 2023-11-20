@@ -1,7 +1,9 @@
 package Homework_8_1;
+import java.util.Arrays;
+
 public class Book implements Printable {
-    private final String title;
-    private final String author;
+    private String title;
+    private String author;
 
     public Book(String title, String author) {
         this.title = title;
@@ -11,18 +13,19 @@ public class Book implements Printable {
     public String getTitle() {
         return title;
     }
+
     @Override
     public void print() {
         System.out.println("Printing a book:");
         System.out.println("Title: " + title);
         System.out.println("Author: " + author);
     }
+
     public static void printBooks(Printable[] printable) {
-        for (Printable item : printable) {
-            if (item instanceof Book) {
-                System.out.println(((Book) item).getTitle());
-            }
-        }
+        Arrays.stream(printable)
+                .filter(item -> item instanceof Book)
+                .map(item -> ((Book) item).getTitle())
+                .forEach(System.out::println);
     }
 }
 

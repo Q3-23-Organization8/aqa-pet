@@ -1,5 +1,8 @@
 package Homework_8_1;
 
+import static java.util.Arrays.stream;
+import static java.lang.System.out;
+
 public class Main {
     public static void main(String[] args) {
         Printable[] printableItems = new Printable[4];
@@ -10,10 +13,8 @@ public class Main {
         printableItems[3] = new Magazine("«Amazonia Investiga»", "EDITORIAL PRIMMATE S.A.S");
 
         // Using lambda expression to print each item in the array
-        for (Printable printable : printableItems) {
-            printable.print();
-            System.out.println();
-        }
+        stream(printableItems).forEach(Printable::print);
+        out.println();
 
         // Using lambda expression to print only magazines
         printFiltered(printableItems, item -> item instanceof Magazine);
@@ -23,16 +24,12 @@ public class Main {
     }
 
     // Generic method to print items based on a filter
-    private static void printFiltered(Printable[] printableItems, PrintFilter filter) {
-        for (Printable item : printableItems) {
-            if (filter.test(item)) {
-                item.print();
-                System.out.println();
-            }
-        }
+    private static void printFiltered(Printable[] printableItems, java.util.function.Predicate<Printable> filter) {
+        stream(printableItems)
+                .filter(filter)
+                .forEach(item -> {
+                    item.print();
+                    out.println();
+                });
     }
-}
-
-interface PrintFilter {
-    boolean test(Printable printable);
 }
